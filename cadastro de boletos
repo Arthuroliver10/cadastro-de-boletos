@@ -1,0 +1,63 @@
+import tkinter as tk
+
+# Lista de Boletos
+boletos = []
+
+# Função para cadastrar um novo boleto
+def cadastrar_boleto():
+    numero = numero_entry.get()
+    data = data_entry.get()
+    vencimento = vencimento_entry.get()
+    status = status_entry.get()
+    boleto = {'Numero': numero, 'Data': data, 'Vencimento': vencimento, 'Status': status}
+    boletos.append(boleto)
+    print("Boleto cadastrado com sucesso!")
+
+# Função para listar todos os boletos
+def listar_boletos():
+    if not boletos:
+        resultado_label.config(text="Nenhum boleto cadastrado.")
+    else:
+        resultado_label.config(text="")
+        for boleto in boletos:
+            resultado_label.config(text=resultado_label.cget("text") + f"{boleto}\n")
+
+# Criar a janela principal
+root = tk.Tk()
+root.title("Gerenciador de Boletos")
+
+# Criar e posicionar os widgets
+titulo_label = tk.Label(root, text="Gerenciador de Boletos")
+titulo_label.grid(row=0, column=0, columnspan=2)
+
+numero_label = tk.Label(root, text="Número do Boleto:")
+numero_label.grid(row=1, column=0)
+numero_entry = tk.Entry(root)
+numero_entry.grid(row=1, column=1)
+
+data_label = tk.Label(root, text="Data de Emissão:")
+data_label.grid(row=2, column=0)
+data_entry = tk.Entry(root)
+data_entry.grid(row=2, column=1)
+
+vencimento_label = tk.Label(root, text="Data de Vencimento:")
+vencimento_label.grid(row=3, column=0)
+vencimento_entry = tk.Entry(root)
+vencimento_entry.grid(row=3, column=1)
+
+status_label = tk.Label(root, text="Status de Pagamento:")
+status_label.grid(row=4, column=0)
+status_entry = tk.Entry(root)
+status_entry.grid(row=4, column=1)
+
+cadastrar_button = tk.Button(root, text="Cadastrar Boleto", command=cadastrar_boleto)
+cadastrar_button.grid(row=5, column=0, columnspan=2, pady=5)
+
+listar_button = tk.Button(root, text="Listar Boletos", command=listar_boletos)
+listar_button.grid(row=6, column=0, columnspan=2, pady=5)
+
+resultado_label = tk.Label(root, text="")
+resultado_label.grid(row=7, column=0, columnspan=2)
+
+# Iniciar o loop de eventos
+root.mainloop()
